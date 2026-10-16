@@ -5,6 +5,8 @@ import sys
 import tempfile
 import unittest
 import zipfile
+import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -13,6 +15,25 @@ from offline.package import SplitWriter
 
 
 class OfflineTests(unittest.TestCase):
+    def test_upstream_packed_activation_preserves_strict_shell_options(self):
+        import conda_pack
+        upstream = Path(conda_pack.__file__).parent / "scripts/posix/activate"
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory) / "packed"
+            (prefix / "bin").mkdir(parents=True)
+            shutil.copyfile(upstream, prefix / "bin/activate")
+            script = '''unset CONDA_PREFIX PS1
+source "$1" "$2"
+[[ "$CONDA_PREFIX" == "$2" ]]
+[[ "$-" == *u* && "$-" == *e* ]]
+source "$1" "$2"
+[[ "$CONDA_PREFIX" == "$2" ]]
+'''
+            result = subprocess.run(["bash", "-euo", "pipefail", "-c", script,
+                "activation-test", str(ROOT / "offline/activate_prefix.sh"), str(prefix)],
+                text=True, capture_output=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_windows_and_relative_dataset_paths(self):
         self.assertEqual(str(local_path(r"D:\research datasets\MRI", Path("/bundle"))),
                          "/mnt/d/research datasets/MRI")

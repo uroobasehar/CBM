@@ -16,7 +16,7 @@ if [[ -e offline/.env ]]; then
 fi
 mkdir offline/.env
 tar -xzf offline/environment.tar.gz -C offline/.env
-source offline/.env/bin/activate
+source offline/activate_prefix.sh "$PWD/offline/.env"
 conda-unpack
 python -m pip check
 echo 'Environment extracted. Do not move this folder after conda-unpack.'

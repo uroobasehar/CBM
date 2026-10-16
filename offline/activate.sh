@@ -5,7 +5,7 @@ export CBM_HOME
 if [[ ! -x "$CBM_HOME/offline/.env/bin/python" ]]; then
     echo 'Run bash offline/install_offline.sh first.' >&2; return 1
 fi
-source "$CBM_HOME/offline/.env/bin/activate"
+source "$CBM_HOME/offline/activate_prefix.sh" "$CBM_HOME/offline/.env"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_DATASETS_OFFLINE=1
 export HF_HUB_DISABLE_TELEMETRY=1 TFDS_DISABLE_GCS=1 PIP_NO_INDEX=1
 export KERAS_HOME="$CBM_HOME/offline/models/keras"
