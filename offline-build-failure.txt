@@ -1,0 +1,106 @@
+## Offline bundle build failed
+
+No full payload was published. Build tail:
+
+```text
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870dafba0> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870dafba0> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870daf880> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870daf880> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870dafe20> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870dafe20> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f587a57f600> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f587a57f600> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870daf740> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function load_caltech101.<locals>.<lambda> at 0x7f5870daf740> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: 'NoneType' object has no attribute '__dict__'
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+PASS: CUB metadata joins, path/hash checks and fixed train/test boundaries
+Downloading and preparing dataset Unknown size (download: Unknown size, generated: Unknown size, total: Unknown size) to /tmp/cbm-adapters-ctry0sl5/tfds/caltech101/3.0.2...
+Dataset caltech101 downloaded and prepared to /tmp/cbm-adapters-ctry0sl5/tfds/caltech101/3.0.2. Subsequent calls will reuse this data.
+Classes: 101 | split sizes: {'train': 909, 'test': 202, 'val': 101}
+PASS: prepared TFDS Caltech tree; 101 non-background classes and 1212 fixture records
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1792119351.723611    2567 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+[brain_tumor / full / seed 42] dataset loading and split checks
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa307241c60> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa307241c60>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa306953600> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa306953600>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa306952520> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa306952520>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+Classes: 2 | split sizes: {'train': 21, 'test': 8, 'val': 3}
+[brain_tumor / full / seed 42] dataset samples, split counts and preprocessing visuals
+Saved training samples for 2 classes; 1 page(s).
+[brain_tumor / full / seed 42] model initialization / saved architecture
+[brain_tumor / full / seed 42] head training / recovery
+Saved recoverable head epoch 1; optimizer step 6
+[brain_tumor / full / seed 42] fine-tuning / recovery
+Saved recoverable finetune epoch 1; optimizer step 6
+[brain_tumor / full / seed 42] held-out classification testing
+[brain_tumor / full / seed 42] explanation audits
+[brain_tumor / full / seed 42] classification, concept and textual explanation reports
+[brain_tumor / full / seed 42] completed
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4a980> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4a980>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4a980> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4a980>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4b4c0> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4b4c0>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4b4c0> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4b4c0>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4bc40> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4bc40>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+WARNING:tensorflow:AutoGraph could not transform <function file_dataset.<locals>.decode at 0x7fa2fcb4bc40> and will run it as-is.
+Cause: Unable to locate the source code of <function file_dataset.<locals>.decode at 0x7fa2fcb4bc40>. Note that functions defined in certain environments, like the interactive Python shell, do not expose their source code. If that is the case, you should define them in a .py source file. If you are certain the code is graph-compatible, wrap the call using @tf.autograph.experimental.do_not_convert. Original error: source code not available
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+Classes: 2 | split sizes: {'train': 21, 'test': 8, 'val': 3}
+PASS: local MRI adapter, two-stage synthetic training, checkpoints, restart, all 8 test predictions, audits and HTML report
+PASS: real EfficientNet-B1 random-weight CPU forward/backpropagation; pretrained/GPU checks remain separate
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 148, in _get_module_details
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "/home/runner/work/CBM/CBM/.offline-build/rg-cbm/lib/python3.12/site-packages/conda_pack/__init__.py", line 2, in <module>
+    from .core import CondaEnv, CondaPackException, File, pack
+  File "/home/runner/work/CBM/CBM/.offline-build/rg-cbm/lib/python3.12/site-packages/conda_pack/core.py", line 16, in <module>
+    import pkg_resources
+ModuleNotFoundError: No module named 'pkg_resources'
+```
