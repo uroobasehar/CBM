@@ -38,7 +38,21 @@ unset PIP_NO_INDEX HF_HUB_OFFLINE TRANSFORMERS_OFFLINE HF_DATASETS_OFFLINE
 # These checks deliberately do NOT claim to validate the target GPU.
 "$PY" offline/validate.py --models-only
 "$PY" -m unittest discover -s tests -v
+"$PY" offline/test_adapters.py
 "$PY" offline/test_notebook.py
 "$PY" -m conda_pack -p "$ENV_PREFIX" -o offline/environment.tar.gz --force
+# Exercise relocation before publishing; the target does not have the build prefix.
+VERIFY_PREFIX="$BUILD/relocation-check"
+if [[ -e "$VERIFY_PREFIX" ]]; then
+    echo 'Move/remove the prior .offline-build/relocation-check before a repeat build.' >&2; exit 1
+fi
+mkdir "$VERIFY_PREFIX"
+tar -xzf offline/environment.tar.gz -C "$VERIFY_PREFIX"
+(
+    source "$VERIFY_PREFIX/bin/activate"
+    conda-unpack
+    python -m pip check
+    python offline/validate.py --models-only
+)
 "$PY" offline/package.py --full
 echo 'Full payload built. Transfer every CBM-offline-full.zip.part* file, SHA256SUMS, and assemble.ps1.'
