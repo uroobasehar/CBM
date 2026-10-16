@@ -40,7 +40,7 @@ unset PIP_NO_INDEX HF_HUB_OFFLINE TRANSFORMERS_OFFLINE HF_DATASETS_OFFLINE
 "$PY" -m unittest discover -s tests -v
 "$PY" offline/test_adapters.py
 "$PY" offline/test_notebook.py
-"$PY" -m conda_pack -p "$ENV_PREFIX" -o offline/environment.tar.gz --force
+"$ENV_PREFIX/bin/conda-pack" -p "$ENV_PREFIX" -o offline/environment.tar.gz --force
 # Exercise relocation before publishing; the target does not have the build prefix.
 VERIFY_PREFIX="$BUILD/relocation-check"
 if [[ -e "$VERIFY_PREFIX" ]]; then
