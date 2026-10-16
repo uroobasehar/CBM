@@ -4,7 +4,7 @@ This repository adapts the uploaded notebook to existing local datasets and prov
 
 **Modern TensorFlow GPU training does not work in native Windows Anaconda.** TensorFlow 2.10 was the last native Windows GPU release and is unsuitable for this notebook and Blackwell. Install/use Ubuntu 22.04 or newer **WSL2** on Windows 11. The supplied Linux environment cannot be activated in Windows Anaconda Prompt. Anaconda/Miniforge inside WSL can use it as a prefix environment, but no additional conda installation is needed to extract and run the packed environment.
 
-The target GPU is not present on the build host. CUDA 12.8/cuDNN 9.8 are selected for Blackwell, but the official TensorFlow wheel relies on PTX for newer GPUs. **The target GPU convolution, gradient and XLA checks must pass before calling the GPU environment ready.** The scripts fail visibly if the target driver/runtime cannot execute them; they do not silently fall back to CPU.
+The target GPU is not present on the build host. CUDA 12.8/cuDNN 9.8 are selected for Blackwell, but the official TensorFlow wheel relies on PTX for newer GPUs. **The target GPU convolution, matrix multiplication and pretrained EfficientNet gradient checks must pass before calling the GPU environment ready.** XLA is an optional diagnostic because the notebook explicitly uses `jit_compile=False`. The scripts fail visibly if the target driver/runtime cannot execute them; they do not silently fall back to CPU.
 
 ## Which download to transfer
 
@@ -111,7 +111,7 @@ nvidia-smi
 bash offline/start.sh
 ```
 
-The start script activates local CUDA libraries, sets Hugging Face/TFDS/pip offline flags, validates local paths, executes a **GPU convolution and gradient step plus XLA matrix multiplication**, loads the local EfficientNet weights, and generates Qwen tokens from local weights. It then starts JupyterLab, listening only on loopback, with its normal token authentication. Open the token-bearing address printed by Jupyter in your Windows browser and select **RG-CBM offline (WSL GPU)**. Open `RG_CBM_Cross_Domain_Caltech101_Ablation_(6).ipynb` and run cells top to bottom.
+The start script activates local CUDA libraries, sets Hugging Face/TFDS/pip offline flags, validates local paths, executes **GPU convolution/gradients and matrix multiplication**, reports a separate optional XLA diagnostic, loads and backpropagates through local EfficientNet weights, and generates Qwen tokens from local weights. It then starts JupyterLab, listening only on loopback, with its normal token authentication. Open the token-bearing address printed by Jupyter in your Windows browser and select **RG-CBM offline (WSL GPU)**. Open `RG_CBM_Cross_Domain_Caltech101_Ablation_(6).ipynb` and run cells top to bottom.
 
 For validation alone:
 
@@ -120,7 +120,7 @@ source offline/activate.sh
 python offline/validate.py
 ```
 
-If the GPU smoke check fails, keep its real error and fix the Windows driver/WSL/runtime compatibility before training. Setting `require_gpu` to false is an explicit CPU experiment; it does not validate the requested GPU workflow. First PTX compilation on Blackwell can take longer. TensorFlow stays float32 as in the notebook; CPU Qwen avoids GPU memory competition. Lower the notebook's batch size only if actual GPU memory exhaustion occurs and use a new campaign for changed scientific settings.
+If a required GPU smoke check fails, keep its real error and fix the Windows driver/WSL/runtime compatibility before training. Setting `require_gpu` to false is an explicit CPU experiment; it does not validate the requested GPU workflow. First PTX compilation on Blackwell can take longer. TensorFlow stays float32 as in the notebook; CPU Qwen avoids GPU memory competition. Lower the notebook's batch size only if actual GPU memory exhaustion occurs and use a new campaign for changed scientific settings.
 
 Outputs and resumable checkpoints go under the configured `results_root`. Choose a new `CAMPAIGN_NAME` for a new experiment; retain it and other controls to resume. Qwen failures retain labeled template fallbacks in each case's metadata. For intentionally deterministic non-LLM explanations, choose `"text_backend": "template"` in settings.
 
