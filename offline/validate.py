@@ -6,7 +6,7 @@ import sys
 
 HOME = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(HOME))
-from offline.runtime import configure, preflight
+from offline.runtime import configure, preflight, efficientnet_b1
 
 
 def validate_models(settings):
@@ -16,8 +16,9 @@ def validate_models(settings):
     weights = Path(settings["efficientnet_weights"])
     if not weights.is_file():
         raise FileNotFoundError(weights)
-    backbone = tf.keras.applications.EfficientNetB1(include_top=False, weights=str(weights),
-                                                  input_shape=(64, 64, 3))
+    backbone = efficientnet_b1(tf, "imagenet", 64, settings)
+    if sum(isinstance(layer, tf.keras.layers.Rescaling) for layer in backbone.layers) != 2:
+        raise RuntimeError("EfficientNet ImageNet preprocessing graph differs from the expected two rescaling layers")
     output = backbone(tf.zeros((1, 64, 64, 3)), training=False)
     tf.debugging.assert_all_finite(output, "EfficientNet forward pass failed")
     if settings["text_backend"] == "local_qwen":

@@ -3,6 +3,31 @@ import json
 import os
 from pathlib import Path
 import re
+import hashlib
+
+
+def efficientnet_b1(tf, weights, image_size, settings):
+    """Keep Keras's ImageNet-only preprocessing; use a verified local cache.
+
+    Passing a filename as `weights` omits an ImageNet-specific Rescaling layer
+    in Keras EfficientNet. Preserve weights='imagenet' after verifying that the
+    exact file its resolver will use is already present and valid.
+    """
+    if weights == "imagenet":
+        from keras.src.backend.config import keras_home
+        path = Path(settings["efficientnet_weights"]).resolve()
+        expected_path = (Path(keras_home()) / "models/efficientnetb1_notop.h5").resolve()
+        if path != expected_path:
+            raise RuntimeError("Keras was imported before offline configuration. Restart the kernel and run from the first cell.")
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing offline ImageNet weights: {path}")
+        with path.open("rb") as stream:
+            actual = hashlib.file_digest(stream, "md5").hexdigest()
+        # Published Keras EfficientNet-B1 no-top hash (Keras 3.15.1).
+        if actual != "74c4e6b3e1f6a1eea24c589628592432":
+            raise ValueError("Offline ImageNet weights failed the published Keras hash; no download attempted.")
+    return tf.keras.applications.EfficientNetB1(include_top=False, weights=weights,
+                                              input_shape=(image_size, image_size, 3))
 
 
 def local_path(value, home):

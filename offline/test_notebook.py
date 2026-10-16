@@ -16,7 +16,7 @@ os.environ["TF_NUM_INTRAOP_THREADS"] = "2"
 os.environ["TF_NUM_INTEROP_THREADS"] = "2"
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from offline.runtime import configure, caltech_folder_frames
+from offline.runtime import configure, caltech_folder_frames, efficientnet_b1
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
     settings = configure(ROOT)
     settings["require_gpu"] = False
     ns = dict(RUN_MODE="auto", OFFLINE_SETTINGS=settings,
-              caltech_folder_frames=caltech_folder_frames)
+              caltech_folder_frames=caltech_folder_frames, efficientnet_b1=efficientnet_b1)
     for index in (11, 13, 15, 17, 19, 21, 23, 25, 27):
         exec(compile(notebook.cells[index].source, f"notebook-cell-{index}", "exec"), ns)
     rng = np.random.default_rng(42)
