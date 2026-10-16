@@ -1,0 +1,43 @@
+name: Build Windows WSL offline bundle
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'offline/**'
+      - '*.ipynb'
+      - 'tests/**'
+      - '.github/workflows/build-offline.yml'
+permissions:
+  contents: write
+concurrency:
+  group: offline-bundle-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make room for the multi-GB runtime and model payload
+        run: |
+          # Disposable hosted runner only; these SDKs are unrelated to this build.
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h .
+      - name: Build conda environment, local models, tests and split ZIP
+        run: bash offline/build_online.sh
+      - name: Publish full payload as release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="offline-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cat > "$RUNNER_TEMP/release-notes.md" <<'NOTES'
+          Offline Linux conda environment for Windows 11 / Ubuntu WSL2, including EfficientNet-B1 and Qwen weights. Datasets are supplied locally by the user.
+
+          Download EVERY CBM-offline-full.zip.part* asset, SHA256SUMS and assemble.ps1. Run assemble.ps1 on Windows, extract the ZIP, and follow README.md. A source/setup ZIP alone does not contain the binary environment or pretrained models.
+
+          CPU synthetic training and local-model loading passed on the builder. Target Blackwell GPU, Windows driver, WSL prerequisites and real datasets still require validation on the offline PC.
+          NOTES
+          gh release create "$tag" dist/CBM-offline-full.zip.part* dist/SHA256SUMS dist/assemble.ps1 --target "$GITHUB_SHA" --title "Windows WSL offline bundle $tag" --notes-file "$RUNNER_TEMP/release-notes.md"

@@ -1,0 +1,15 @@
+.offline-build/
+offline/models/
+offline/environment.tar.gz
+offline/settings.local.json
+offline/payload-manifest.json
+offline/build-info.json
+offline/resolved-requirements.txt
+offline/conda-explicit.txt
+offline/.env/
+datasets/
+results/
+dist/
+__pycache__/
+.ipynb_checkpoints/
+*.zip.part*

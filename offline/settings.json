@@ -1,0 +1,12 @@
+{
+  "datasets": ["brain_tumor", "pathmnist", "caltech101", "cub2002011"],
+  "brain_tumor_root": "datasets/brain_tumor",
+  "medmnist_root": "datasets/medmnist",
+  "caltech101_root": "datasets/101_ObjectCategories",
+  "caltech101_format": "folders",
+  "tfds_root": "datasets/tfds",
+  "cub_root": "datasets/CUB_200_2011",
+  "results_root": "results",
+  "text_backend": "local_qwen",
+  "require_gpu": true
+}
